@@ -1,29 +1,48 @@
-# README #
+# Kubernetes Development
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Kubernetes GoLang development environment that uses,
+- [Multipass](https://multipass.run/)([Microk8s](https://microk8s.io/))
+- [Skaffold](https://skaffold.dev/)
+- [Cloud Code](https://cloud.google.com/code)
+- [VS Code Remote-Containers Extensions](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
-### What is this repository for? ###
+# Setup
+## Install prerequisites
+Install prerequisites bellow.
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+1. Multipass
+    
+    See [Multipass Site](https://multipass.run/) and install multipass. Or simply run `brew cask install multipass`
 
-### How do I get set up? ###
+1. Visual Studio Code
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+    See [VS Code Site](https://code.visualstudio.com/).
 
-### Contribution guidelines ###
+1. Docker and Remote-Containers Extension
 
-* Writing tests
-* Code review
-* Other guidelines
+    See [VS Code Remote-Containers Extensions](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) page. Or simply run `brew cask install visual-studio-code`.
 
-### Who do I talk to? ###
+## Run setup script
+Run setup script. That script will
+- Create multipass VM
+- Install Microk8s
+- Setup Microk8s
+- Create configfile in clusterinfo directory
+- Create launch.json
 
-* Repo owner or admin
-* Other community or team contact
+and so on. To run setup script, simply type `sh setup_cluster.sh` in `scripts/setup` directory. This script also shows message like bellow.
+Please add `insecure-registries` configuration to the docker setting.
+```
+Add docker daemon config below and restart docker.
+======================================================
+{"insecure-registries" : [ "192.168.64.7:32000" ]}
+======================================================
+Done.
+```
+(Mac) If you want to specify the IP address of VM, examine /var/db/dhcpd_leases.
+
+## Open in VSCode and Remote-Containers Extension
+Open this directory with VSCode with Remote-Containers Extension.Remote container may be created.
+
+<!-- ## Download GoLang extension manually and install.
+Currently, Cloud Code extension does not support the new GoLang extension. You should download [old version](https://github.com/microsoft/vscode-go/releases/download/0.14.3/Go-0.14.3.vsix) and install it manually. -->

@@ -1,0 +1,23 @@
+# Ingress for Kiali
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: kiali-ingress
+  namespace: istio-system
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/ssl-passthrough: "false"
+    nginx.ingress.kubernetes.io/secure-backends: "false"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+spec:
+  rules:
+  # Change name by IP address.
+  - host: kiali.%%EXTERNAL_IP%%.nip.io
+    http:
+      paths:
+      - path: /(.*)
+        backend:
+          serviceName: kiali
+          servicePort: http-kiali
