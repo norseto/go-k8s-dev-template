@@ -1,9 +1,8 @@
 # # Use base golang image from Docker Hub
-# FROM golang:1.14-alpine
+FROM golang:1.14-alpine
 
 # # Download the dlv (delve) debugger for go (you can comment this out if unused)
-# RUN apk add git && go get -u -v github.com/go-delve/delve/cmd/dlv
-FROM norseto/go-dlv:1.14
+RUN apk add git && go get -u -v github.com/go-delve/delve/cmd/dlv
 
 WORKDIR /src/hello-world
 

@@ -1,8 +1,8 @@
 // For format details, see https://aka.ms/vscode-remote/devcontainer.json or the definition README at
 // https://github.com/microsoft/vscode-dev-containers/tree/master/containers/go
 {
-	"name": "CloudCode-Go",
-	"dockerFile": "variants/golang/Dockerfile",
+	"name": "k8s",
+	"dockerFile": "variants/basic/Dockerfile",
 	"runArgs": [
 		// Uncomment the next line to use a non-root user. On Linux, this will prevent
 		// new files getting created as root, but you may need to update the USER_UID
@@ -16,14 +16,7 @@
 	// Use 'settings' to set *default* container specific settings.json values on container create. 
 	// You can edit these settings after create using File > Preferences > Settings > Remote.
 	"settings": { 
-		"terminal.integrated.shell.linux": "/bin/bash",
-		"go.gopath": "/go",
-		"go.testFlags": [ "-v", "-coverpkg=./..." ],
-		"go.coverOnSingleTest": true,
-		"go.coverOnSingleTestFile": true,
-		"go.coverageOptions": "showUncoveredCodeOnly",
-		"cloudcode.autoDependencies": "off",
-		"cloudcode.enableTelemetry": false,
+		"terminal.integrated.shell.linux": "/bin/bash"
 	},
 	
 	// Uncomment the next line if you want to publish any ports.
@@ -35,9 +28,6 @@
 	// Add the IDs of extensions you want installed when the container is created in the array below.
 	"extensions": [
 		"ms-azuretools.vscode-docker",
-		"googlecloudtools.cloudcode",
-		"golang.go",
-		// "ms-vscode.go"
 	],
 
 	// See https://code.visualstudio.com/docs/remote/containers#_attached-container-config-reference
@@ -47,7 +37,6 @@
 	},
 
 	"mounts": [
-		"source=${localWorkspaceFolder}/scripts/devenv/clusterinfo,target=/root/.kube,type=bind,consistency=cached",
-		"source=${localWorkspaceFolder}/.devcontainer/extensions,target=/root/.vscode-server/extensions,type=bind,consistency=cached",
+		"source=${localWorkspaceFolder}/scripts/devenv/clusterinfo,target=/root/.kube,type=bind,consistency=cached"
 	]
 }

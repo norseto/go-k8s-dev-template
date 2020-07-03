@@ -18,7 +18,8 @@ func main() {
 	}
 
 	log.Printf("server starting to listen on %s", addr)
-	http.HandleFunc("/", home)
+	http.HandleFunc("/checkready", checkready)
+	http.HandleFunc("/hello", home)
 	if err := http.ListenAndServe(addr, nil); err != nil {
 		log.Fatalf("server listen error: %+v", err)
 	}
@@ -28,4 +29,11 @@ func main() {
 func home(w http.ResponseWriter, r *http.Request) {
 	log.Printf("received request: %s %s", r.Method, r.URL.Path)
 	fmt.Fprintf(w, "Hello, world!！\n")
+}
+
+// checkready returns health check for Readiness probe.
+// Pod status does not become "Ready" during this
+// method returns.
+func checkready(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "OK\n")
 }

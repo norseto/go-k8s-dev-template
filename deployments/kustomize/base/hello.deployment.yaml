@@ -16,12 +16,15 @@ spec:
     metadata:
       labels:
         app: go-hello-world
-      annotations:
-        sidecar.istio.io/inject: "true"
     spec:
       containers:
       - name: server
         image: go-hello-world
+        readinessProbe:
+          httpGet:
+            port: 8080
+            path: /checkready
+            scheme: HTTP
         ports:
         - containerPort: 8080
         env:

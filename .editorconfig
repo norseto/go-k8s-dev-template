@@ -1,0 +1,19 @@
+root = true
+
+[.devcontainer/*.json]
+indent_style = tab
+
+[*.go]
+indent_style = tab
+
+[Dockerfile]
+indent_style = spaces
+indent_size = 4
+
+[*.sh]
+indent_style = spaces
+indent_size = 4
+
+[*.{yml,yaml,json}]
+indent_style = spaces
+indent_size = 2

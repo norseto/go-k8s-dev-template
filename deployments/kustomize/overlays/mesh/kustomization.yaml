@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Should use namespace or namePrefix or nameSuffix
+# to separate environment in cluster.
+namespace: mesh
+# namePrefix: mesh-
+
+resources:
+# - namespace.yaml
+- peerauthentication.yaml
+- hello.gw.yaml
+bases:
+- ../../base
+

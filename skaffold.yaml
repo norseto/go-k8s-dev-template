@@ -5,14 +5,84 @@ build:
     sha256: {}
   artifacts:
   - context: .
+    sync:
+      infer:
+      - cmd/**
+      - internal/**
+      - build/**
+      - deployments/**
     image: go-hello-world
     docker:
-      dockerfile: build/skaffold/Dockerfile
+      # Docker file for normal launch.
+      dockerfile: build/default/Dockerfile
 deploy:
-  kubectl:
-    manifests:
-    - build/skaffold/k8s/**
+  kustomize:
+    path: deployments/kustomize/base
+
 profiles:
+- name: develop
+  build:
+    artifacts:
+    - context: .
+      sync:
+        infer:
+        - cmd/**
+        - internal/**
+        - build/**
+        - deployments/**
+      image: go-hello-world
+      docker:
+        # Docker file for debug(dlv) launch.
+        dockerfile: build/develop/Dockerfile
+
+# Run in service mesh (istio) - Istio should be installed in the cluster.
+- name: mesh
+  deploy:
+    kustomize:
+      path: deployments/kustomize/overlays/mesh
+  portForward:
+  - resourceType: Service
+    namespace: istio-system
+    resourceName: kiali
+    port: 20001
+    localPort: 20001
+  - resourceType: Service
+    namespace: istio-system
+    resourceName: istio-ingressgateway
+    port: 80
+    localPort: 9080
+
+# Build and debug in the cluster.
+- name: remote-debug
+  build:
+    artifacts:
+    - context: .
+      sync:
+        infer:
+        - cmd/**
+        - internal/**
+        - build/**
+        - deployments/**
+      image: go-hello-world
+      kaniko:
+        dockerfile: build/develop/Dockerfile
+        cache: {}
+    cluster:
+      namespace: kaniko
+      dockerConfig:
+        secretName: registrykey
+  portForward:
+  - resourceType: Deployment
+    resourceName: go-hello-world
+    port: 8080
+    localPort: 8080
+  - resourceType: Deployment
+    resourceName: go-hello-world
+    port: 3000
+    localPort: 3000
+
 - name: cloudbuild
   build:
     googleCloudBuild: {}
+  
+

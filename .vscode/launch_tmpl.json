@@ -2,13 +2,35 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Run/Debug on Kubernetes",
+      "name": "Run on Kubernetes",
       "type": "cloudcode.kubernetes",
       "request": "launch",
       "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
       "watch": true,
       "cleanUp": true,
       "portForward": true,
+      "imageRegistry": "%%SKAFFOLD_DEFAULT_REPO%%"
+    },
+    {
+      "name": "Debug on Kubernetes",
+      "type": "cloudcode.kubernetes",
+      "request": "launch",
+      "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
+      "watch": true,
+      "cleanUp": true,
+      "portForward": true,
+      "profile": "develop",
+      "imageRegistry": "%%SKAFFOLD_DEFAULT_REPO%%"
+    },
+    {
+      "name": "Run on Kubernetes in Mesh",
+      "type": "cloudcode.kubernetes",
+      "request": "launch",
+      "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
+      "watch": true,
+      "cleanUp": true,
+      "portForward": true,
+      "profile": "mesh",
       "imageRegistry": "%%SKAFFOLD_DEFAULT_REPO%%"
     },
     {

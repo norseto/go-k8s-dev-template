@@ -11,7 +11,7 @@ fi
 SCRIPTDIR=$( cd "$( dirname "$0" )" && pwd )
 KUBECTL=/snap/bin/microk8s.kubectl
 
-export ISTIO_VERSION=1.6.2
+export ISTIO_VERSION=1.6.4
 if [ ! -x ${SCRIPTDIR}/istio-${ISTIO_VERSION}/bin/istioctl ] ; then
 	(cd ${SCRIPTDIR} && curl -L https://istio.io/downloadIstio | sh -)
 fi
@@ -30,7 +30,6 @@ data:
   passphrase: a2lhbGk=
 _EOM
 ${KUBECTL} -n istio-system apply -f -
-${KUBECTL} label namespace default istio-injection=enabled
 
 export KUBECONFIG=/tmp/istioconf
 istioctl install -f ${SCRIPTDIR}/istio.yaml

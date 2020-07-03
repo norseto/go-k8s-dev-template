@@ -1,0 +1,8 @@
+.devcontainer/
+.vscode/
+.idea/
+build/
+img/
+scripts/
+skaffold.yaml
+*.md

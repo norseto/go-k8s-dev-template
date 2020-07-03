@@ -1,0 +1,7 @@
+# Assumed istio will be enabled in prod namespace.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mesh
+  labels:
+    istio-injection: enabled
