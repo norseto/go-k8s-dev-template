@@ -8,6 +8,7 @@ SCRIPTDIR=$( cd "$( dirname "$0" )" && pwd )
 ENVDIR="${SCRIPTDIR}/env"
 NAME=""
 ISTIO=0
+HELM=0
 DISKSIZE="40G"
 MEMSIZE="4G"
 
@@ -20,7 +21,8 @@ do
     case "$1" in
     "-n") shift; NAME=$1 ;;
     "--with-istio") ISTIO=1 ;;
-    *)  echo "Usage: $0 [-n vmname] [--with-istio]"; exit 1 ;;
+    "--with-helm")  HELM=1 ;;
+    *)  echo "Usage: $0 [-n vmname] [--with-istio] [--with-helm]"; exit 1 ;;
     esac
     if [ $# -gt 0 ] ; then
         shift
@@ -53,6 +55,15 @@ echo "Add docker daemon config below and restart docker if you need."
 echo "======================================================"
 echo '{"insecure-registries" : [' "\"${HOST_IP}:32000\"" ']}'
 echo "======================================================"
+
+if [ ${HELM} -eq 1 ] ; then
+    echo ""
+    echo "##############################################"
+    echo "# Install HELM                               #"
+    echo "##############################################"
+    multipass copy-files "${SCRIPTDIR}/remote/install_helm.sh" "${VMNAME}:/tmp"
+    multipass exec "${VMNAME}" -- sh -x /tmp/install_helm.sh "${HOST_IP}"
+fi
 
 if [ ${ISTIO} -eq 1 ] ; then
     echo ""

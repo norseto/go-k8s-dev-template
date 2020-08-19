@@ -43,7 +43,7 @@ spec:
       name: istio-ingressgateway
       k8s:
         service:
-          type: ClusterIP
+          type: NodePort
           ports:
           - name: status-port
             port: 15021
@@ -68,10 +68,10 @@ spec:
         resources:
           limits:
             cpu: 100m
-            memory: 40Mi
+            memory: 64Mi
           requests:
             cpu: 100m
-            memory: 40Mi
+            memory: 64Mi
 
     egressGateways:
     - enabled: true
@@ -88,10 +88,10 @@ spec:
         resources:
           limits:
             cpu: 100m
-            memory: 40Mi
+            memory: 64Mi
           requests:
             cpu: 100m
-            memory: 40Mi
+            memory: 64Mi
 
     istiodRemote:
       enabled: false

@@ -11,7 +11,7 @@ fi
 SCRIPTDIR=$( cd "$( dirname "$0" )" && pwd )
 KUBECTL=/snap/bin/microk8s.kubectl
 
-export ISTIO_VERSION=1.6.4
+export ISTIO_VERSION=1.6.8
 if [ ! -x ${SCRIPTDIR}/istio-${ISTIO_VERSION}/bin/istioctl ] ; then
 	(cd ${SCRIPTDIR} && curl -L https://istio.io/downloadIstio | sh -)
 fi
