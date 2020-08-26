@@ -11,7 +11,12 @@ fi
 SCRIPTDIR=$( cd "$( dirname "$0" )" && pwd )
 KUBECTL=/snap/bin/microk8s.kubectl
 
-export ISTIO_VERSION=1.6.8
+#export ISTIO_VERSION=1.6.8
+#ISTIO_MANIFEST=istio_16.yaml
+
+export ISTIO_VERSION=1.7.0
+ISTIO_MANIFEST=istio_17.yaml
+
 if [ ! -x ${SCRIPTDIR}/istio-${ISTIO_VERSION}/bin/istioctl ] ; then
 	(cd ${SCRIPTDIR} && curl -L https://istio.io/downloadIstio | sh -)
 fi
@@ -32,7 +37,7 @@ _EOM
 ${KUBECTL} -n istio-system apply -f -
 
 export KUBECONFIG=/tmp/istioconf
-istioctl install -f ${SCRIPTDIR}/istio.yaml
+istioctl install -f ${SCRIPTDIR}/${ISTIO_MANIFEST}
 
 ${KUBECTL} apply -f ${SCRIPTDIR}/k8s-ingress.yaml
 
