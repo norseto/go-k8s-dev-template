@@ -8,6 +8,7 @@ SCRIPTDIR=$( cd "$( dirname "$0" )" && pwd )
 ENVDIR="${SCRIPTDIR}/env"
 NAME=""
 ISTIO=0
+LINKERD=0
 HELM=0
 DISKSIZE="40G"
 MEMSIZE="4G"
@@ -76,6 +77,14 @@ if [ ${ISTIO} -eq 1 ] ; then
     multipass copy-files "${SCRIPTDIR}/remote/k8s/k8s-ingress.yaml" "${VMNAME}:/tmp"
     multipass copy-files "${SCRIPTDIR}/remote/k8s/k8s-kiali-ingress_tpl.yaml" "${VMNAME}:/tmp"
     multipass exec "${VMNAME}" -- sh /tmp/install_istio.sh "${HOST_IP}"
+elif [ ${LINKERD} -eq 1 ] ; then
+    echo ""
+    echo "##############################################"
+    echo "# Install Linkerd                            #"
+    echo "##############################################"
+    multipass copy-files "${SCRIPTDIR}/remote/install_linkerd.sh" "${VMNAME}:/tmp"
+    multipass copy-files "${SCRIPTDIR}/remote/k8s/k8s-linkerd-ingress_tpl.yaml" "${VMNAME}:/tmp"
+    multipass exec "${VMNAME}" -- sh /tmp/install_linkerd.sh "${HOST_IP}"
 fi
 
 echo ""

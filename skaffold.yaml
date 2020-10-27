@@ -36,10 +36,10 @@ profiles:
         dockerfile: build/develop/Dockerfile
 
 # Run in service mesh (istio) - Istio should be installed in the cluster.
-- name: mesh
+- name: istio
   deploy:
     kustomize:
-      path: deployments/kustomize/overlays/mesh
+      path: deployments/kustomize/overlays/istio
   portForward:
   - resourceType: Service
     namespace: istio-system

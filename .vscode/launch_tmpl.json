@@ -23,14 +23,14 @@
       "imageRegistry": "%%SKAFFOLD_DEFAULT_REPO%%"
     },
     {
-      "name": "Run on Kubernetes in Mesh",
+      "name": "Run on Kubernetes under Istio",
       "type": "cloudcode.kubernetes",
       "request": "launch",
       "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
       "watch": true,
       "cleanUp": true,
       "portForward": true,
-      "profile": "mesh",
+      "profile": "istio",
       "imageRegistry": "%%SKAFFOLD_DEFAULT_REPO%%"
     },
     {

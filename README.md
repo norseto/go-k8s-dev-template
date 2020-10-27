@@ -1,4 +1,4 @@
-# Kubernetes Development Environment
+# Kubernetes Golang Development Environment Template (and Sample)
 
 Kubernetes GoLang development environment that uses,
 - [Multipass](https://multipass.run/)([Microk8s](https://microk8s.io/))
@@ -35,7 +35,7 @@ Run setup script. That script will
 - Create configfile in clusterinfo directory
 - Create launch.json
 
-and so on. To run setup script, simply type `sh setup_cluster.sh` in `scripts/devenv` directory. This script also shows message like bellow.
+and so on. To run setup script, simply type `sh setup_microk8s.sh` in `scripts/devenv` directory. This script also shows message like bellow.
 Please add `insecure-registries` configuration to the docker setting.
 ```
 Add docker daemon config below and restart docker.
@@ -78,10 +78,13 @@ However, ***you still need to set up ~/.docker/config.json***
 And create auth secret named `registrykey` for the private image registry.
 
 ### To Run in the Service Mesh(Istio)
-The `setup_cluster.sh` script installs [Istio](https://istio.io) with `--with-istio` option. You can check service behaviour in the service mesh environment. If istio cannot inject the probes, the service will not start. It is worth checking behaviour in the Istio environment. There is the namespace `mesh` that labeled to envoy sidecar injection. Please use this namespace and `Run on Kubernetes in Mesh` action. Additional port forwardings are
+The `setup_microk8s.sh` script installs [Istio](https://istio.io) with `--with-istio` option. You can check service behaviour in the service mesh environment. If istio cannot inject the probes, the service will not start. It is worth checking behaviour in the Istio environment. There is the namespace `mesh` that labeled to envoy sidecar injection. Please use this namespace and `Run on Kubernetes in Mesh` action. Additional port forwardings are
 
 1. 20001 : Kiali console. You can login with admin/kiali.
 1. 9080 : Ingress Gateway. You can curl to this port.
 
 Please note that Cloud Code extension for VSCode does not delete CRDs when stopping.
 
+# Using Okteto
+If you don't want to use the local Microk8s, you can use [Okteto](https://okteto.com/) although you can use only your own namespae.
+Run `setup_okteto.sh` script with `-t [AccessKey]` and your okteto account. This script setup Kubernetes configuration file and launch.json
