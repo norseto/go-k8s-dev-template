@@ -20,13 +20,12 @@ spec:
       containers:
       - name: server
         image: go-hello-world
-        readinessProbe:
-          httpGet:
-            port: 8080
-            path: /checkready
-            scheme: HTTP
         ports:
         - containerPort: 8080
         env:
         - name: PORT
           value: "8080"
+        readinessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 5

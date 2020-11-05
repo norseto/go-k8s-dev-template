@@ -8,8 +8,7 @@
       "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
       "watch": true,
       "cleanUp": true,
-      "portForward": true,
-      "imageRegistry": "%%SKAFFOLD_DEFAULT_REPO%%"
+      "portForward": true
     },
     {
       "type": "go",

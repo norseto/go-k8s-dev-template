@@ -7,7 +7,7 @@
 		// When you use GKE, EKS or AKS, Change VARIANT to the images
 		// that has cloud provider CLI/SDK like golang:1.15-gcp,
 		// golang:1.15-aws, golang:1.15-azure 
-		"args": { "VARIANT": "golang:1.15"}
+		"args": { "VARIANT": "golang:1.15-full"}
 	},
 	"runArgs": [
 		// Uncomment the next line to use a non-root user. On Linux, this will prevent
@@ -30,6 +30,9 @@
 		"go.coverageOptions": "showUncoveredCodeOnly",
 		"cloudcode.autoDependencies": "off",
 		"cloudcode.enableTelemetry": false,
+		"cloudcode.aws": {
+			"eksctlPath": "/usr/local/bin/eksctl"
+		}
 	},
 	
 	// Uncomment the next line if you want to publish any ports.

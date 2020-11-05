@@ -8,10 +8,10 @@ kind: Service
 metadata:
   name: go-hello-world-external
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: go-hello-world
   ports:
   - name: http
-    port: 5000
+    port: 80
     targetPort: 8080
