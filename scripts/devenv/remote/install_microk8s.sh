@@ -6,9 +6,9 @@ if [ $# -gt 0 ] ; then
 	EXTERNAL_IP=$1
 fi
 
-# K8s Version. Currently, EKS supports K8s version 1.14-16
+# K8s Version. Currently, EKS supports K8s version 1.17-18
 # https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html
-K8SVERSION=1.16
+K8SVERSION=1.18
 
 # Install and configure microk8s
 sudo snap install microk8s --classic --channel=${K8SVERSION}/stable || exit 1

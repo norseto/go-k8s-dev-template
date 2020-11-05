@@ -28,7 +28,7 @@ func main() {
 // home logs the received request and returns a simple response.
 func home(w http.ResponseWriter, r *http.Request) {
 	log.Printf("received request: %s %s", r.Method, r.URL.Path)
-	fmt.Fprintf(w, "Hello, world!！\n")
+	fmt.Fprintf(w, "Hello, world!\n")
 }
 
 // checkready returns health check for Readiness probe.
