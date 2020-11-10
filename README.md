@@ -38,6 +38,10 @@ There are some variant you can choose.
 
 - golang:1.15-azure
 
+  Golang SDK, Kubernetes clients and Azure CLI.
+
+- golang:1.15-gcp
+
   Golang SDK, Kubernetes clients and Google Cloud SDK.
 
 - golang:1.15-full
@@ -48,10 +52,10 @@ There are some variant you can choose.
 # Kubernetes Environment
 ## Okteto
 The most convenient way to get Kubernetes runtime environment is [Okteto](https://okteto.com/) although you can use only your own namespae.
-Run `setup_okteto.sh` script with `-t [AccessKey]` and your okteto account. This script setup Kubernetes configuration file and launch.json
+Run `setup_okteto.sh` script **in the container** with `-t [AccessKey]` and your okteto account. This script setup Kubernetes configuration file and launch.json
 
 ## AWS EKS and ECR
-AWS is the most major cloud provider. Therefore, there are likely to be many opportunities to use EKS and ECR. EKS cluster and ECR repository must already exist。Run `setup_aws.sh` script with `-c [ClusterName]`.  This script setup Kubernetes configuration file and launch.json
+AWS is the most major cloud provider. Therefore, there are likely to be many opportunities to use EKS and ECR. EKS cluster and ECR repository must already exist。Run `setup_aws.sh` script with `-c [ClusterName]` **in the container**.  This script setup Kubernetes configuration file and launch.json
 
 ## Azure AKS and ACR
 *TBD*
@@ -63,7 +67,7 @@ AWS is the most major cloud provider. Therefore, there are likely to be many opp
 To use [Microk8s](https://microk8s.io/) with Mac, [Multipass](https://multipass.run/) is required. See Multipass Site and install multipass. Or simply run `brew cask install multipass`
 
 ### Run setup script
-Run setup script. That script will
+Run setup script **on your local machine**. That script will
 - Create multipass VM
 - Install Microk8s
 - Setup Microk8s
